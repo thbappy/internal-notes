@@ -1,0 +1,13 @@
+<h2>Notes</h2>
+
+<a href="{{ path('note_new') }}">New Note</a>
+
+<ul>
+{% for note in notes %}
+    <li>
+        <b>{{ note.title }}</b>
+        <a href="{{ path('note_edit', {id: note.id}) }}">Edit</a>
+        <a href="{{ path('note_delete', {id: note.id}) }}">Delete</a>
+    </li>
+{% endfor %}
+</ul>
