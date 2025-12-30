@@ -26,6 +26,12 @@ class Note
     /** @ORM\Column(type="datetime") */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="notes")
+     * @ORM\JoinColumn(nullable=true, onDelete="CASCADE")
+     */
+    private $user;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -61,5 +67,16 @@ class Note
     public function getCreatedAt(): \DateTime
     {
         return $this->createdAt;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+        return $this;
     }
 }

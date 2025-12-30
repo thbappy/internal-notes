@@ -1,13 +1,43 @@
-<h2>Notes</h2>
+{% extends "base.html.twig" %}
 
-<a href="{{ path('note_new') }}">New Note</a>
+{% block title %}My Notes{% endblock %}
 
-<ul>
-{% for note in notes %}
-    <li>
-        <b>{{ note.title }}</b>
-        <a href="{{ path('note_edit', {id: note.id}) }}">Edit</a>
-        <a href="{{ path('note_delete', {id: note.id}) }}">Delete</a>
-    </li>
-{% endfor %}
-</ul>
+{% block body %}
+<div class="container my-5">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="h2">📝 My Notes</h1>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="{{ path('note_new') }}" class="btn btn-success">+ New Note</a>
+        </div>
+    </div>
+
+    {% if notes|length == 0 %}
+        <div class="alert alert-info">
+            <p>No notes yet. <a href="{{ path('note_new') }}">Create your first note</a></p>
+        </div>
+    {% else %}
+        <div class="row">
+            {% for note in notes %}
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ note.title }}</h5>
+                            <p class="card-text text-muted small">{{ note.createdAt|date('M d, Y H:i') }}</p>
+                            <p class="card-text">{{ note.content|length > 100 ? note.content|slice(0, 100) ~ '...' : note.content }}</p>
+                        </div>
+                        <div class="card-footer bg-white border-top">
+                            <a href="{{ path('note_edit', {id: note.id}) }}" class="btn btn-sm btn-primary">Edit</a>
+                            <form method="POST" action="{{ path('note_delete', {id: note.id}) }}" style="display:inline;">
+                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+

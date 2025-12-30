@@ -1,0 +1,70 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Register - Notes App{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body p-5">
+                    <h1 class="h2 mb-4 text-center">Create Your Account</h1>
+
+                    <form method="post" action="{{ path('app_register') }}">
+                        <div class="mb-3">
+                            <label for="form_email" class="form-label">Email</label>
+                            <input type="email" id="form_email" name="form[email]" class="form-control" 
+                                   placeholder="Enter your email" required autofocus>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="form_password" class="form-label">Password</label>
+                            <input type="password" id="form_password" name="form[password]" class="form-control" 
+                                   placeholder="Enter your password (min 6 characters)" required>
+                            <small class="form-text text-muted">Password must be at least 6 characters long</small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 mb-3">Register</button>
+                    </form>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <p class="text-muted mb-0">Already have an account? 
+                            <a href="{{ path('app_login') }}" class="text-decoration-none">Login here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+    }
+
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
+
+    .btn-primary {
+        background-color: #667eea;
+        border-color: #667eea;
+    }
+
+    .btn-primary:hover {
+        background-color: #5568d3;
+        border-color: #5568d3;
+    }
+
+    h1 {
+        color: #333;
+    }
+</style>
+{% endblock %}
